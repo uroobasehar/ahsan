@@ -17,3 +17,8 @@ class reviewForm(forms.ModelForm):
         model = review
         fields = "__all__"
   
+class userForm(forms.ModelForm):
+    class Meta:  
+        model = user
+        fields = "__all__"
+  

@@ -48,3 +48,17 @@ class review(models.Model):
     
     class Meta:
         db_table = 'review'
+
+class user(models.Model):
+    id = models.IntegerField(primary_key=True)
+    create_date = models.DateTimeField()
+    write_date = models.DateTimeField()
+    create_uid = models.IntegerField()
+    write_uid = models.IntegerField()
+    email = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = 'user'

@@ -21,5 +21,7 @@ urlpatterns = [
     path('addCategory', views.addCategory, name='addCategory'),
     path('reviews', views.reviews, name='reviews'),
     path('addReview', views.addReview, name='addReview'),
+    path('users', views.users, name='users'),
+    path('addUser', views.addUser, name='addUser'),
 
 ]
