@@ -1,4 +1,4 @@
-# [Django Dashboard Material](https://appseed.us/admin-dashboards/django-dashboard-material)
+# [International Review System](https://github.com/uroobasehar/ahsan/)
 
 **Open-Source Admin Dashboard** coded in **[Django Framework](https://www.djangoproject.com/)** on top of **Material Dashboard** design (free version) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
 
