@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 """
+
 License: Commercial
 Copyright (c) 2019 - present AppSeed.us
 """
@@ -19,7 +20,8 @@ SECRET_KEY = config('SECRET_KEY', default='S#perS3crEt_1122')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-dashboard-black-pro.herokuapp.com']
+ALLOWED_HOSTS = ['localhost',
+ '127.0.0.1', 'django-dashboard-black-pro.herokuapp.com']
 
 # Application definition
 
