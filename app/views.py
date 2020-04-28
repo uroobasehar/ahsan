@@ -38,13 +38,13 @@ def pages(request):
 
 @login_required(login_url="/login/")
 def products(request):
-    context = {'segment' : 'products'}
+    
     type = "grid"
     products = product.objects.all()
-    segment = "products"
+   
     return render(request, 'pages/products.html'
                   , {'products': products
-                      , 'type': type},context)
+                      , 'type': type})
 
 @login_required(login_url="/login/")
 def addProduct(request):
@@ -170,31 +170,31 @@ def addReview(request):
         #latest = product.objects.latest('id')
         form.fields["id"].initial = 1 # latest.id+ 1
         id = request.POST['id']
-        name = request.POST['name']
+        reviewer_id = request.POST['reviewer_id']
         create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         create_uid = 1
         write_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         write_uid = 1
-        parent_category = request.POST['category']
+        product_id = request.POST['product_id']
         description = request.POST['description']
        
-        pro = product_category(id=id, write_date=write_date, write_uid=write_uid,create_date=create_date,
-         create_uid = create_uid, name=name, description=description,  parent_category=parent_category)
+        pro = review(id=id, write_date=write_date, write_uid=write_uid,create_date=create_date,
+         create_uid = create_uid, reviewer_id=reviewer_id, description=description,  product_id=product_id)
 
         pro.save()
-        cats = product_category.objects.all()
+        reviews = review.objects.all()
                 #messages.success(request, f'Success, Product Saved Successfully')
         return render(request, 'pages/categories.html'
-                              , {'type': type, 'msg': msg, 'cats': cats})
+                              , {'type': type, 'msg': msg, 'reviews': reviews})
          #   except:
           #      pass
         #else:
             #messages.warning(request, f'Sorry, Record Save Error - Invalid Fields')
             #return redirect(addProduct)
     else:
-        form = productForm()
-        #latest = product.objects.latest('id')
-        form.fields["id"].initial = 1 #latest.id+ 1
+        form = reviewForm()
+       # latest = product.objects.latest('id')
+        form.fields["id"].initial = 1#latest.id+ 1
         form.fields["create_uid"].initial = 1
         form.fields["write_uid"].initial = 1
         form.fields["create_date"].initial = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -205,7 +205,7 @@ def addReview(request):
         form.fields['create_uid'].widget.attrs['readonly'] = True
         form.fields['write_uid'].widget.attrs['readonly'] = True
         type = "add"
-        return render(request, 'pages/categories.html', {'type': type, 'form': form})
+        return render(request, 'pages/reviews.html', {'type': type, 'form': form})
 
 @login_required(login_url="/login/")
 def users(request):
@@ -223,8 +223,8 @@ def addUser(request):
         #    try:
         type = "grid"
         msg = "1"
-        latest = product.objects.latest('id')
-        form.fields["id"].initial =  latest.id+ 1
+       # latest = product.objects.latest('id')
+        form.fields["id"].initial = 1#  latest.id+ 1
         id = request.POST['id']
         name = request.POST['name']
         create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
