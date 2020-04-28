@@ -184,7 +184,7 @@ def addReview(request):
         pro.save()
         reviews = review.objects.all()
                 #messages.success(request, f'Success, Product Saved Successfully')
-        return render(request, 'pages/categories.html'
+        return render(request, 'pages/reviews.html'
                               , {'type': type, 'msg': msg, 'reviews': reviews})
          #   except:
           #      pass

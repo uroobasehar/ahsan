@@ -80,7 +80,7 @@
             <div class="card">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">
-                  Add Category
+                  Add Review
                 </h4>
               </div>
               <div class="card-body">
@@ -89,7 +89,7 @@
                     {% if msg %}
                       <span class="text-danger">{{ msg }}</span>
                     {% else %}
-                      Add your credentials for new product 
+                      Add review for a specific Product
                     {% endif %}  
                 </h6>
                 
@@ -109,15 +109,15 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Id</label>
+                          <label class="bmd-label-floating">Review Id</label>
                           <input type="number" class="form-control" name="id" placeholder="{{ form.id }}
 
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Name *</label>
-                          <input type="text" class="form-control" name="name">
+                          <label class="bmd-label-floating">Product Id *</label>
+                          <input type="text" class="form-control" name="product_id">
                         </div>
                       </div>
                     </div>
@@ -129,8 +129,8 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Description *</label>
-                          <input type="text" class="form-control" name="description">
+                          <label class="bmd-label-floating">Reviewer Id *</label>
+                          <input type="text" class="form-control" name="reviewer_id">
                         </div>
                       </div>
                     </div>
@@ -142,8 +142,8 @@
                      
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"> Parent Category</label>
-                          <input type="text" class="form-control" name="category">
+                          <label class="bmd-label-floating"> Review</label>
+                          <input type="text" class="form-control" name="description">
                         </div>
                       </div>
                     </div>
@@ -151,19 +151,9 @@
       
                     <br />
       
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Category Picture</label>
-                          {{ form.password2 }}
-                        </div>
-                      </div>
-                    </div>
-                    <span class="text-danger">{{ form.password2.errors }}</span>
+                  
       
-                    <br />
-      
-                    <button type="submit" name="register" class="btn btn-primary pull-left">Add Category</button>
+                    <button type="submit" name="register" class="btn btn-primary pull-left">Add Review</button>
       
                     &nbsp; &nbsp; 
                     <span class="pull-right">
