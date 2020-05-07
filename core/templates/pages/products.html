@@ -31,6 +31,9 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
+                          Product Image
+                        </th>
+                        <th>
                           ID
                         </th>
                         <th>
@@ -43,10 +46,18 @@
                         <th>
                           Price
                         </th>
+                        <th>
+                          Action
+                        </th>
                       </thead>
                       <tbody>
                         {% for product in products %}
                         <tr>
+                          <td>
+                            <a target="_blank" href="/static/assets/img/image-placeholder.jpg">
+                              <img src="/static/assets/img/image-placeholder.jpg" alt="Product_Image" style="width:100px">
+                            </a>
+                          </td>
                           <td>
                             {{product.id}}
                           </td>
@@ -60,6 +71,7 @@
                           <td class="text-primary">
                             {{product.price}}
                           </td>
+                          <td ><a href=""> <i class="material-icons">edit</i></a><a href="/deleteProduct/{{product.id}}"> <i class="material-icons">delete</i> </a></td>
                         </tr>
                         {% endfor %}
                       

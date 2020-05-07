@@ -42,7 +42,9 @@
                         <th>
                           Reviewer Name
                         </th>
-                       
+                        <th>
+                         Action
+                        </th>
                         
                       </thead>
                       <tbody>
@@ -61,6 +63,8 @@
                           <td class="text-primary">
                             {{review.reviewer_id}}
                           </td>
+                          <td ><a href=""> <i class="material-icons">edit</i></a><a href="/deleteReview/{{review.id}}"> <i class="material-icons">delete</i> </a></td>
+
                         </tr>
                         {% endfor %}
                       

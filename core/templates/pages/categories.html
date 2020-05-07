@@ -43,6 +43,9 @@
                         <th>
                           Parent Category
                         </th>
+                        <th>
+                          Action
+                        </th>
                       </thead>
                       <tbody>
                         {% for cat in cats %}
@@ -60,6 +63,8 @@
                           <td class="text-primary">
                             {{cat.parent_category}}
                           </td>
+                          <td ><a href=""> <i class="material-icons">edit</i></a><a href="/deleteCategory/{{cat.id}}"> <i class="material-icons">delete</i> </a></td>
+
                         </tr>
                         {% endfor %}
                       

@@ -39,7 +39,9 @@
                         <th>
                           Role
                         </th>
-                       
+                        <th>
+                          Action
+                        </th>
                         
                       </thead>
                       <tbody>
@@ -56,6 +58,8 @@
                           <td class="text-primary">
                             {{user.role}}
                           </td>
+                          <td ><a href=""> <i class="material-icons">edit</i></a><a href="/deleteUser/{{user.id}}"> <i class="material-icons">delete</i> </a></td>
+
                         </tr>
                         {% endfor %}
                       

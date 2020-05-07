@@ -17,11 +17,16 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('products', views.products, name='products'),
     path('addProduct', views.addProduct, name='addProduct'),
+    path('deleteProduct/<id>/', views.deleteProduct, name='deleteProduct'),
     path('categories', views.categories, name='categories'),
     path('addCategory', views.addCategory, name='addCategory'),
+    path('deleteCategory/<id>/', views.deleteCategory, name='deleteCategory'),
     path('reviews', views.reviews, name='reviews'),
     path('addReview', views.addReview, name='addReview'),
+    path('deleteReview/<id>/', views.deleteReview, name='deleteReview'),
     path('users', views.users, name='users'),
     path('addUser', views.addUser, name='addUser'),
+    path('deleteUser/<id>/', views.deleteUser, name='deleteUser'),
+
 
 ]

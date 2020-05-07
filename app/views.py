@@ -250,7 +250,7 @@ def addUser(request):
             #return redirect(addProduct)
     else:
         form = userForm()
-        latest = product.objects.latest('id')
+        latest = user.objects.latest('id')
         form.fields["id"].initial = latest.id+ 1
         form.fields["create_uid"].initial = 1
         form.fields["write_uid"].initial = 1
@@ -263,4 +263,60 @@ def addUser(request):
         form.fields['write_uid'].widget.attrs['readonly'] = True
         type = "add"
         return render(request, 'pages/users.html', {'type': type, 'form': form})
+
+def deleteProduct(request, id):
+    pro = product.objects.get(id=id)
+    pro.delete()
+    type = "grid"
+    msg = "2"
+    products = product.objects.all()
+    #if True:
+     #   messages.success(request, f'Success, Record Deleted Successfully')
+    #elif False:
+     #   messages.error(request, f'Sorry, Record Delete Error')
+
+    return render(request, 'pages/products.html'
+                  , {'type': type, 'msg': msg, 'products': products})
+
+def deleteCategory(request, id):
+    cat = product_category.objects.get(id=id)
+    cat.delete()
+    type = "grid"
+    msg = "2"
+    cats = product_category.objects.all()
+    #if True:
+     #   messages.success(request, f'Success, Record Deleted Successfully')
+    #elif False:
+     #   messages.error(request, f'Sorry, Record Delete Error')
+
+    return render(request, 'pages/categories.html'
+                  , {'type': type, 'msg': msg, 'cats': cats})
+
+def deleteReview(request, id):
+    rev = review.objects.get(id=id)
+    rev.delete()
+    type = "grid"
+    msg = "2"
+    reviews = review.objects.all()
+    #if True:
+     #   messages.success(request, f'Success, Record Deleted Successfully')
+    #elif False:
+     #   messages.error(request, f'Sorry, Record Delete Error')
+
+    return render(request, 'pages/reviews.html'
+                  , {'type': type, 'msg': msg, 'reviews': reviews})
+                
+def deleteUser(request, id):
+    user = user.objects.get(id=id)
+    user.delete()
+    type = "grid"
+    msg = "2"
+    users = user.objects.all()
+    #if True:
+     #   messages.success(request, f'Success, Record Deleted Successfully')
+    #elif False:
+     #   messages.error(request, f'Sorry, Record Delete Error')
+
+    return render(request, 'pages/users.html'
+                  , {'type': type, 'msg': msg, 'users': users})
 
