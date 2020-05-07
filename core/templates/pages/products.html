@@ -8,6 +8,18 @@
 {% block content %}
 {% if type == "grid" %}
         <div class="row">
+          <div class="col-sm-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
             <div class="col-md-12">
               <div class="card"> 
                 <div class="card-header card-header-primary">

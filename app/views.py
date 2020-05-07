@@ -10,6 +10,7 @@ from django.template import loader
 from django.http import HttpResponse
 from app.models import *
 from app.forms import *
+from django.contrib import messages
 from datetime import datetime
 
 @login_required(login_url="/login/")
@@ -71,7 +72,7 @@ def addProduct(request):
 
         pro.save()
         products = product.objects.all()
-                #messages.success(request, f'Success, Product Saved Successfully')
+        messages.success(request, f'Success, Product Saved Successfully')
         return render(request, 'pages/products.html'
                               , {'type': type, 'msg': msg, 'products': products})
          #   except:
@@ -127,7 +128,7 @@ def addCategory(request):
 
         pro.save()
         cats = product_category.objects.all()
-                #messages.success(request, f'Success, Product Saved Successfully')
+        messages.success(request, f'Success, Product Saved Successfully')
         return render(request, 'pages/categories.html'
                               , {'type': type, 'msg': msg, 'cats': cats})
          #   except:
@@ -168,8 +169,8 @@ def addReview(request):
         #    try:
         type = "grid"
         msg = "1"
-        #latest = product.objects.latest('id')
-        form.fields["id"].initial = 1 # latest.id+ 1
+        latest = product.objects.latest('id')
+        form.fields["id"].initial =  latest.id+ 1
         id = request.POST['id']
         reviewer_id = request.POST['reviewer_id']
         create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -194,8 +195,8 @@ def addReview(request):
             #return redirect(addProduct)
     else:
         form = reviewForm()
-       # latest = product.objects.latest('id')
-        form.fields["id"].initial = 1#latest.id+ 1
+        latest = product.objects.latest('id')
+        form.fields["id"].initial = latest.id+ 1
         form.fields["create_uid"].initial = 1
         form.fields["write_uid"].initial = 1
         form.fields["create_date"].initial = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -224,8 +225,8 @@ def addUser(request):
         #    try:
         type = "grid"
         msg = "1"
-       # latest = product.objects.latest('id')
-        form.fields["id"].initial = 1#  latest.id+ 1
+        latest = product.objects.latest('id')
+        form.fields["id"].initial =  latest.id+ 1
         id = request.POST['id']
         name = request.POST['name']
         create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -241,7 +242,7 @@ def addUser(request):
 
         pro.save()
         users = user.objects.all()
-                #messages.success(request, f'Success, Product Saved Successfully')
+        messages.success(request, f'Success, Product Saved Successfully')
         return render(request, 'pages/users.html'
                               , {'type': type, 'msg': msg, 'users': users})
          #   except:
@@ -271,10 +272,10 @@ def deleteProduct(request, id):
     type = "grid"
     msg = "2"
     products = product.objects.all()
-    #if True:
-     #   messages.success(request, f'Success, Record Deleted Successfully')
-    #elif False:
-     #   messages.error(request, f'Sorry, Record Delete Error')
+    if True:
+       messages.warning(request, f'Success, Record Deleted Successfully')
+    elif False:
+       messages.error(request, f'Sorry, Record Delete Error')
 
     return render(request, 'pages/products.html'
                   , {'type': type, 'msg': msg, 'products': products})
@@ -285,10 +286,10 @@ def deleteCategory(request, id):
     type = "grid"
     msg = "2"
     cats = product_category.objects.all()
-    #if True:
-     #   messages.success(request, f'Success, Record Deleted Successfully')
-    #elif False:
-     #   messages.error(request, f'Sorry, Record Delete Error')
+    if True:
+       messages.warning(request, f'Success, Record Deleted Successfully')
+    elif False:
+       messages.error(request, f'Sorry, Record Delete Error')
 
     return render(request, 'pages/categories.html'
                   , {'type': type, 'msg': msg, 'cats': cats})
@@ -299,10 +300,10 @@ def deleteReview(request, id):
     type = "grid"
     msg = "2"
     reviews = review.objects.all()
-    #if True:
-     #   messages.success(request, f'Success, Record Deleted Successfully')
-    #elif False:
-     #   messages.error(request, f'Sorry, Record Delete Error')
+    if True:
+       messages.warning(request, f'Success, Record Deleted Successfully')
+    elif False:
+       messages.error(request, f'Sorry, Record Delete Error')
 
     return render(request, 'pages/reviews.html'
                   , {'type': type, 'msg': msg, 'reviews': reviews})
@@ -313,10 +314,10 @@ def deleteUser(request, id):
     type = "grid"
     msg = "2"
     users = user.objects.all()
-    #if True:
-     #   messages.success(request, f'Success, Record Deleted Successfully')
-    #elif False:
-     #   messages.error(request, f'Sorry, Record Delete Error')
+    if True:
+       messages.warning(request, f'Success, Record Deleted Successfully')
+    elif False:
+       messages.error(request, f'Sorry, Record Delete Error')
 
     return render(request, 'pages/users.html'
                   , {'type': type, 'msg': msg, 'users': users})
