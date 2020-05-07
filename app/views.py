@@ -65,8 +65,9 @@ def addProduct(request):
         category = request.POST['category']
         description = request.POST['description']
         price = request.POST['price']
+        product_image=request.POST['product_image']
         pro = product(id=id, write_date=write_date, write_uid=write_uid,create_date=create_date,
-         create_uid = create_uid, name=name, description=description, price=price, category=category)
+         create_uid = create_uid, name=name, description=description, price=price, category=category,product_image=product_image)
 
         pro.save()
         products = product.objects.all()

@@ -54,8 +54,8 @@
                         {% for product in products %}
                         <tr>
                           <td>
-                            <a target="_blank" href="/static/assets/img/image-placeholder.jpg">
-                              <img src="/static/assets/img/image-placeholder.jpg" alt="Product_Image" style="width:100px">
+                            <a target="_blank" href="{{product.product_image}}">
+                              <img src="{{product.product_image}}" alt="Product_Image" style="width:100px" name="product_image">
                             </a>
                           </td>
                           <td>
@@ -171,7 +171,12 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Product Picture</label>
-                          {{ form.password2 }}
+                        
+                        </div>
+                        <input id="product_image" type="file" multiple="multiple" name="product_image" />
+                        <hr />
+                        
+                        <div id="dvPreview">
                         </div>
                       </div>
                     </div>
@@ -199,4 +204,35 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+$(function () {
+    $("#product_image").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#dvPreview");
+            dvPreview.html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            $($(this)[0].files).each(function () {
+                var file = $(this);
+                if (regex.test(file[0].name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("style", "height:100px;width: 100px");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
+                    }
+                    reader.readAsDataURL(file[0]);
+                } else {
+                    alert(file[0].name + " is not a valid image file.");
+                    dvPreview.html("");
+                    return false;
+                }
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    });
+});
+</script>{% endblock javascripts %}

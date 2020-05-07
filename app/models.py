@@ -19,6 +19,7 @@ class product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
+    product_image = models.ImageField(default='/static/assets/img/image-placeholder.jpg', upload_to='static/assets/img/')
     
     class Meta:
         db_table = 'product'
