@@ -13,10 +13,10 @@ from app.forms import *
 from django.contrib import messages
 from datetime import datetime
 
-@login_required(login_url="/login/")
+#@login_required(login_url="/login/")
 def index(request):
     context = {'segment' : 'index'}
-    return render(request, "index.html", context)
+    return render(request, "pages/frontend/index.html", context)
 
 @login_required(login_url="/login/")
 def pages(request):
