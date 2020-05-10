@@ -19,6 +19,11 @@ def index(request):
     return render(request, "pages/frontend/index.html", context)
 
 @login_required(login_url="/login/")
+def admin(request):
+    context = {'segment' : 'index'}
+    return render(request, "index.html", context)
+
+@login_required(login_url="/login/")
 def pages(request):
     context = {}
     # All resource paths end in .html.

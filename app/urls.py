@@ -15,6 +15,7 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('admin', views.admin, name='admin'),
     path('products', views.products, name='products'),
     path('addProduct', views.addProduct, name='addProduct'),
     path('deleteProduct/<id>/', views.deleteProduct, name='deleteProduct'),
