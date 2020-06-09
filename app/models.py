@@ -19,7 +19,7 @@ class product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
-    product_image = models.ImageField(default='/static/assets/img/image-placeholder.jpg', upload_to='static/assets/img/')
+    product_image = models.ImageField(max_length=255,  default="/static/assets/img/image-placeholder.jpg", null=True, blank=True)
     
     class Meta:
         db_table = 'product'
@@ -33,6 +33,7 @@ class product_category(models.Model):
     parent_category = models.IntegerField()
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    category_image = models.ImageField(max_length=255,  default="/static/assets/img/image-placeholder.jpg", null=True, blank=True)
 
     class Meta:
         db_table = 'product_category'

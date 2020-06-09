@@ -16,7 +16,22 @@ from datetime import datetime
 #@login_required(login_url="/login/")
 def index(request):
     context = {'segment' : 'index'}
-    return render(request, "pages/frontend/index.html", context)
+    cats = product_category.objects.all()
+    products = product.objects.all()
+    return render(request, "pages/frontend/index.html",{'cats':cats , 'products' : products}, context)
+
+def productsFront(request):
+    context = {'segment' : 'productFront'}
+    cats = product_category.objects.all()
+    products = product.objects.all()
+    return render(request, "pages/frontend/shop.html",{'cats':cats , 'products' : products}, context)
+
+def reviewsFront(request):
+    type = "grid"
+    reviews = review.objects.all()
+    return render(request, 'pages/frontend/reviews.html'
+                  , {'reviews': reviews
+                      , 'type': type})
 
 @login_required(login_url="/login/")
 def admin(request):
@@ -55,7 +70,7 @@ def products(request):
 @login_required(login_url="/login/")
 def addProduct(request):
     if request.method == "POST":
-        form = productForm(request.POST)
+        form = productForm(request.POST, request.FILES,instance=product)
        # if form.is_valid():
         #    try:
         type = "grid"
@@ -71,7 +86,7 @@ def addProduct(request):
         category = request.POST['category']
         description = request.POST['description']
         price = request.POST['price']
-        product_image=request.POST['product_image']
+        product_image=request.FILES['product_image']
         pro = product(id=id, write_date=write_date, write_uid=write_uid,create_date=create_date,
          create_uid = create_uid, name=name, description=description, price=price, category=category,product_image=product_image)
 
@@ -112,13 +127,13 @@ def categories(request):
 @login_required(login_url="/login/")
 def addCategory(request):
     if request.method == "POST":
-        form = categoryForm(request.POST)
+        form = categoryForm(request.POST, request.FILES)
        # if form.is_valid():
         #    try:
         type = "grid"
         msg = "1"
-        latest = product.objects.latest('id')
-        form.fields["id"].initial =  latest.id+ 1
+        latest = product_category.objects.latest('id')
+        form.fields["id"].initial =  latest.id+1
         id = request.POST['id']
         name = request.POST['name']
         create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -127,13 +142,13 @@ def addCategory(request):
         write_uid = 1
         parent_category = request.POST['category']
         description = request.POST['description']
-       
+        category_image = request.FILES['category_image']
         pro = product_category(id=id, write_date=write_date, write_uid=write_uid,create_date=create_date,
-         create_uid = create_uid, name=name, description=description,  parent_category=parent_category)
+         create_uid = create_uid, name=name, description=description,  parent_category=parent_category, category_image= category_image)
 
         pro.save()
         cats = product_category.objects.all()
-        messages.success(request, f'Success, Product Saved Successfully')
+        messages.success(request, f'Success, Product Category Saved Successfully')
         return render(request, 'pages/categories.html'
                               , {'type': type, 'msg': msg, 'cats': cats})
          #   except:
@@ -142,9 +157,9 @@ def addCategory(request):
             #messages.warning(request, f'Sorry, Record Save Error - Invalid Fields')
             #return redirect(addProduct)
     else:
-        form = productForm()
-        latest = product.objects.latest('id')
-        form.fields["id"].initial = latest.id+ 1
+        form = categoryForm()
+        latest = product_category.objects.latest('id')
+        form.fields["id"].initial = latest.id + 1
         form.fields["create_uid"].initial = 1
         form.fields["write_uid"].initial = 1
         form.fields["create_date"].initial = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

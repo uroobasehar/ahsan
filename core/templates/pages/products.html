@@ -66,9 +66,9 @@
                         {% for product in products %}
                         <tr>
                           <td>
-                            <a target="_blank" href="{{product.product_image}}">
-                              <img src="{{product.product_image}}" alt="Product_Image" style="width:100px" name="product_image">
-                            </a>
+                            {% if product.product_image %}
+                              <img src={{product.product_image.url}} alt="Product_Image" style="width:100px" name="product_image">
+                            {% endif %}
                           </td>
                           <td>
                             {{product.id}}
@@ -125,7 +125,7 @@
                   </p>  
       
                 {% else %}
-                  <form role="form" method="post" action="">
+                  <form role="form" method="post" action="" enctype="multipart/form-data">
                       
                     {% csrf_token %} 
       

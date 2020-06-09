@@ -28,6 +28,7 @@ urlpatterns = [
     path('users', views.users, name='users'),
     path('addUser', views.addUser, name='addUser'),
     path('deleteUser/<id>/', views.deleteUser, name='deleteUser'),
-
+    path('productsFront', views.productsFront, name='productsFront'),
+    path('reviewsFront', views.reviewsFront, name='reviewsFront'),
 
 ]

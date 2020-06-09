@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/basef.html" %}
 
-{% block title %} Categories {% endblock %} 
+{% block title %} Reviews {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -11,67 +11,49 @@
             <div class="col-md-12">
               <div class="card"> 
                 <div class="card-header card-header-primary">
-                <div class="row">
-                <div class="col-md-6">
-                  <h4 class="card-title ">Categories</h4>
-                  
-                  <p class="card-category"> Here is a subtitle for this table</p>
-                 
+                  <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title-all text-center">
+                            <h1>Reviews</h1>
+    <p> These are list of reviews on product </p>                    </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                <a class="card-title" style="float: right;" href="/addCategory">
-                  <i class="material-icons">add</i> 
-                  Add New 
-                </a>
-              </div>
-              </div>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          Category Image
-                        </th>
-                        <th>
                           ID
                         </th>
                         <th>
-                          Name
+                          Product Name
                         </th>
                         <th>
-                          Description
+                          Review
+                        </th>
+                        <th>
+                          Reviewer Name
                         </th>
                        
-                        <th>
-                          Parent Category
-                        </th>
-                        <th>
-                          Action
-                        </th>
+                        
                       </thead>
                       <tbody>
-                        {% for cat in cats %}
+                        {% for review in reviews %}
                         <tr>
                           <td>
-                            {% if cat.category_image %}
-                              <img src={{cat.category_image.url}} alt="Product_Image" style="width:100px" name="product_image">
-                            {% endif %}
+                            {{review.id}}
                           </td>
                           <td>
-                            {{cat.id}}
+                            {{review.product_id}}
                           </td>
                           <td>
-                            {{cat.name}}
-                          </td>
-                          <td>
-                            {{cat.description}}
+                            {{review.description}}
                           </td>
                           
                           <td class="text-primary">
-                            {{cat.parent_category}}
+                            {{review.reviewer_id}}
                           </td>
-                          <td ><a href=""> <i class="material-icons">edit</i></a><a href="/deleteCategory/{{cat.id}}"> <i class="material-icons">delete</i> </a></td>
 
                         </tr>
                         {% endfor %}
@@ -92,7 +74,7 @@
             <div class="card">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">
-                  Add Category
+                  Add Review
                 </h4>
               </div>
               <div class="card-body">
@@ -101,7 +83,7 @@
                     {% if msg %}
                       <span class="text-danger">{{ msg }}</span>
                     {% else %}
-                      Add your credentials for new product 
+                      Add review for a specific Product
                     {% endif %}  
                 </h6>
                 
@@ -114,22 +96,22 @@
                   </p>  
       
                 {% else %}
-                  <form role="form" method="post" action="" enctype="multipart/form-data">
+                  <form role="form" method="post" action="">
                       
                     {% csrf_token %} 
       
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Id</label>
+                          <label class="bmd-label-floating">Review Id</label>
                           <input type="number" class="form-control" name="id" placeholder="{{ form.id }}
 
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Name *</label>
-                          <input type="text" class="form-control" name="name">
+                          <label class="bmd-label-floating">Product Id *</label>
+                          <input type="text" class="form-control" name="product_id">
                         </div>
                       </div>
                     </div>
@@ -141,8 +123,8 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Category Description *</label>
-                          <input type="text" class="form-control" name="description">
+                          <label class="bmd-label-floating">Reviewer Id *</label>
+                          <input type="text" class="form-control" name="reviewer_id">
                         </div>
                       </div>
                     </div>
@@ -154,8 +136,8 @@
                      
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating"> Parent Category</label>
-                          <input type="text" class="form-control" name="category">
+                          <label class="bmd-label-floating"> Review</label>
+                          <input type="text" class="form-control" name="description">
                         </div>
                       </div>
                     </div>
@@ -163,23 +145,9 @@
       
                     <br />
       
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Category Picture</label>
-                        
-                        </div>
-                        <input id="category_image" type="file" multiple="multiple" name="category_image" />
-                        <hr />
-                        
-                        <div id="dvPreview">
-                        </div>
-                      </div>
-                    </div>
+                  
       
-                    <br />
-      
-                    <button type="submit" name="register" class="btn btn-primary pull-left">Add Category</button>
+                    <button type="submit" name="register" class="btn btn-primary pull-left">Add Review</button>
       
                     &nbsp; &nbsp; 
                     <span class="pull-right">
