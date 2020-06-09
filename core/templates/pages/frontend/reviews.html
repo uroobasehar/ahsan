@@ -83,7 +83,7 @@
                     {% if msg %}
                       <span class="text-danger">{{ msg }}</span>
                     {% else %}
-                      Add review for a specific Product
+                      Add review for a selected Product
                     {% endif %}  
                 </h6>
                 
@@ -91,9 +91,7 @@
       
                 {% if success %}
       
-                  <p class="">
-                    Please <a href={% url 'login' %} class="text-black text-small">authenticate</a> using the new account.
-                  </p>  
+                   
       
                 {% else %}
                   <form role="form" method="post" action="">
@@ -111,7 +109,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Product Id *</label>
-                          <input type="text" class="form-control" name="product_id">
+                          <input type="text" class="form-control" name="product_id" placeholder="{{ form.reviewer_id }}
                         </div>
                       </div>
                     </div>
@@ -150,9 +148,7 @@
                     <button type="submit" name="register" class="btn btn-primary pull-left">Add Review</button>
       
                     &nbsp; &nbsp; 
-                    <span class="pull-right">
-                      Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a>
-                    </span>
+                    
       
                     <div class="clearfix"></div>
       
