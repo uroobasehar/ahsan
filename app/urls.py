@@ -34,5 +34,6 @@ urlpatterns = [
     path('productsCat/<id>/', views.productsCat, name='productsCat'),
     path('reviewsFront/<id>/', views.reviewsFront, name='reviewsFront'),
     path('addReviewF/<id>/', views.addReviewF, name='addReviewF'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
 ]
