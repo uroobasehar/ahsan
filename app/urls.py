@@ -19,6 +19,8 @@ urlpatterns = [
     path('products', views.products, name='products'),
     path('addProduct', views.addProduct, name='addProduct'),
     path('deleteProduct/<id>/', views.deleteProduct, name='deleteProduct'),
+    path('editProduct/<id>/', views.editProduct, name='editProduct'),
+    path('updateProduct/<id>/', views.updateProduct, name='updateProduct'),
     path('categories', views.categories, name='categories'),
     path('addCategory', views.addCategory, name='addCategory'),
     path('deleteCategory/<id>/', views.deleteCategory, name='deleteCategory'),
@@ -29,7 +31,8 @@ urlpatterns = [
     path('addUser', views.addUser, name='addUser'),
     path('deleteUser/<id>/', views.deleteUser, name='deleteUser'),
     path('productsFront', views.productsFront, name='productsFront'),
-    path('reviewsFront', views.reviewsFront, name='reviewsFront'),
+    path('productsCat/<id>/', views.productsCat, name='productsCat'),
+    path('reviewsFront/<id>/', views.reviewsFront, name='reviewsFront'),
     path('addReviewF/<id>/', views.addReviewF, name='addReviewF'),
 
 ]

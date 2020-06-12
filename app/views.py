@@ -26,9 +26,15 @@ def productsFront(request):
     products = product.objects.all()
     return render(request, "pages/frontend/shop.html",{'cats':cats , 'products' : products}, context)
 
-def reviewsFront(request):
+def productsCat(request,id):
+    context = {'segment' : 'productCat'}
+    cats = product_category.objects.all()
+    products = product.objects.filter(category=id)
+    return render(request, "pages/frontend/product_by_cat.html",{'cats':cats , 'products' : products}, context)
+
+def reviewsFront(request,id):
     type = "grid"
-    reviews = review.objects.all()
+    reviews = review.objects.filter(product_id=id)
     return render(request, 'pages/frontend/reviews.html'
                   , {'reviews': reviews
                       , 'type': type})
@@ -341,6 +347,42 @@ def deleteUser(request, id):
 
     return render(request, 'pages/users.html'
                   , {'type': type, 'msg': msg, 'users': users})
+
+def editProduct(request, id):
+    type = "edit"
+    editForm = product.objects.get(id=id)
+    return render(request, 'pages/products.html', {'form': editForm, 'type': type})
+
+
+def updateProduct(request, id):
+    type = "grid"
+    pro = product.objects.get(id=id)
+    id = pro.id
+    name = request.POST['name']
+    create_date = pro.create_date
+    create_uid = pro.create_uid
+    write_date = pro.write_date
+    write_uid = pro.write_uid
+    category = request.POST['category']
+    description = request.POST['description']
+    price = request.POST['price']
+    product_image=request.FILES['product_image']
+  
+    pro = product(id=id, create_date=create_date, write_date=write_date, create_uid=create_uid
+                              , write_uid=write_uid, name=name, category=category, description=description,
+                              price=price, product_image=product_image)
+    pro.save()
+    msg = "3"
+    products = product.objects.all()
+
+    if True:
+        messages.success(request, f'Success, Product Updated Successfully')
+    elif False:
+        messages.error(request, f'Sorry, Product Update Error')
+
+    return render(request, 'pages/products.html'
+                  , {'type': type, 'msg': msg, 'products': products})
+
 
 
 def addReviewF(request , id):
